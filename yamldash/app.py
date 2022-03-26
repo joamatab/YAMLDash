@@ -25,7 +25,6 @@ app = dash.Dash(
 )
 
 wsgi_app = app.server
-
 app.title = "YAMLDash - Interactive YAML Validation"
 
 app.layout = layout
@@ -35,6 +34,7 @@ from yamldash import callbacks  # noqa: E402, F401
 
 def run_debug():
     app.run_server(debug=True)
+    # app.run_server(debug=True)
 
 
 def run():

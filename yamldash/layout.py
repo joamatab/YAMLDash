@@ -1,8 +1,9 @@
 from pathlib import Path
 
+from dash import html
+from dash import dcc
+
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
 
 SRC_URL = "https://github.com/DrGFreeman/YAMLDash"
 YAML_REF_URL = "https://yaml.org/spec/1.2/spec.html"
@@ -24,7 +25,7 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(dbc.NavLink("Schema Reference", href=SCHEMA_REF_URL, target="_blank")),
         dbc.NavItem(
             dbc.NavLink(
-                ["Source Code ", html.I(className="fa fa-lg fa-github")],
+                ["Code ", html.I(className="fa fa-lg fa-github")],
                 href=SRC_URL,
                 target="_blank",
             )
@@ -102,5 +103,4 @@ footer = html.Div(
 )
 
 body = dbc.Container(children=[dbc.Row([yaml_col, schema_col],), footer], fluid=True)
-
 layout = html.Div([navbar, body])
