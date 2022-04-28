@@ -90,16 +90,20 @@ footer = html.Div(
                 html.Small(
                     [
                         "Ⓒ 2020, Julien de la Bruère-Terreault (DrGFreeman). ",
-                        html.A("MIT License", href=SRC_URL + "/blob/master/LICENSE"),
+                        html.A(
+                            "MIT License",
+                            href=f"{SRC_URL}/blob/master/LICENSE",
+                        ),
                         ".",
                     ]
-                ),
+                )
             ],
             className="text-center text-muted",
         ),
     ],
     className="mt-4",
 )
+
 
 body = dbc.Container(children=[dbc.Row([yaml_col, schema_col],), footer], fluid=True)
 

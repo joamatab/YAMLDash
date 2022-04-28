@@ -25,24 +25,21 @@ def validate_schema(schema_text):
         except jsonschema.exceptions.SchemaError as e:
             return (
                 None,
-                class_name + " is-invalid",
+                f"{class_name} is-invalid",
                 f"Invalid Schema: {e}",
                 "invalid-feedback",
             )
+
         except jsonschema.ValidationError:
-            return (
-                schema_dict,
-                class_name + " is-valid",
-                "Valid Schema",
-                "valid-feedback",
-            )
+            return schema_dict, f"{class_name} is-valid", "Valid Schema", "valid-feedback"
         except Exception as e:
             return (
                 None,
-                class_name + " is-invalid",
+                f"{class_name} is-invalid",
                 f"YAML ParsingError: {e}",
                 "invalid-feedback",
             )
+
 
     return (None, class_name, "", "")
 
@@ -60,16 +57,15 @@ def validate_yaml(schema, yaml_text):
         else:
             return class_name, ""
     except Exception as e:
-        return (class_name + " is-invalid", f"YAML ParsingError: {e}")
+        return f"{class_name} is-invalid", f"YAML ParsingError: {e}"
 
-    if yaml_dict is not None:
-        if schema is not None:
-            try:
-                jsonschema.validate(yaml_dict, schema)
-                return class_name + " is-valid", ""
-            except jsonschema.exceptions.ValidationError as e:
-                return (class_name + " is-invalid", f"Schema ValidationError: {e}")
-        else:
-            return class_name + " is-valid", ""
-    else:
+    if yaml_dict is None:
         return class_name, ""
+    if schema is not None:
+        try:
+            jsonschema.validate(yaml_dict, schema)
+            return f"{class_name} is-valid", ""
+        except jsonschema.exceptions.ValidationError as e:
+            return f"{class_name} is-invalid", f"Schema ValidationError: {e}"
+    else:
+        return f"{class_name} is-valid", ""
